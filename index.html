@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keshav Maini — Web Developer & SEO Specialist</title>
+<meta name="description" content="Portfolio of Keshav Maini — web developer and SEO specialist based in Punjab, India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e13;
+    --bg-elevated:#10161d;
+    --surface:#141c24;
+    --border:#212b35;
+    --border-hover:#2e3b48;
+    --text:#e7edf3;
+    --text-muted:#8a99a8;
+    --text-dim:#5c6b7a;
+    --accent:#4fd1c5;
+    --accent-soft:rgba(79,209,197,0.12);
+    --accent-2:#f2b155;
+    --accent-2-soft:rgba(242,177,85,0.12);
+    --mono:'JetBrains Mono', monospace;
+    --display:'Space Grotesk', sans-serif;
+    --body:'Inter', sans-serif;
+    --radius:10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent-soft);color:var(--accent);}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(10,14,19,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .logo{font-family:var(--mono);font-size:15px;color:var(--text);}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:28px;font-family:var(--mono);font-size:13px;color:var(--text-muted);}
+  .nav-links a:hover{color:var(--accent);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;}
+
+  @media (max-width:720px){
+    .nav-links{
+      position:fixed;top:64px;right:0;left:0;
+      background:var(--bg-elevated);
+      border-bottom:1px solid var(--border);
+      flex-direction:column;gap:0;
+      max-height:0;overflow:hidden;
+      transition:max-height .25s ease;
+    }
+    .nav-links.open{max-height:300px;}
+    .nav-links a{padding:14px 24px;border-top:1px solid var(--border);}
+    .nav-toggle{display:block;}
+  }
+
+  /* HERO */
+  header.hero{padding:150px 0 90px;}
+  .terminal{
+    font-family:var(--mono);font-size:14px;color:var(--accent);
+    margin-bottom:22px;min-height:22px;
+  }
+  .terminal::before{content:"keshav@web-dev:~$ ";color:var(--text-dim);}
+  .cursor{display:inline-block;width:8px;height:16px;background:var(--accent);margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  h1.name{
+    font-family:var(--display);
+    font-size:clamp(38px,6vw,64px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.05;
+    margin-bottom:14px;
+  }
+  .role-line{
+    font-family:var(--display);
+    font-size:clamp(18px,2.4vw,22px);
+    color:var(--text-muted);
+    font-weight:500;
+    margin-bottom:22px;
+  }
+  .role-line .accent{color:var(--accent);}
+  .role-line .accent2{color:var(--accent-2);}
+  p.lede{max-width:560px;color:var(--text-muted);font-size:16px;margin-bottom:32px;}
+
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);font-size:13px;
+    padding:12px 22px;border-radius:var(--radius);
+    border:1px solid var(--border);
+    display:inline-flex;align-items:center;gap:8px;
+    transition:border-color .15s, background .15s;
+  }
+  .btn-primary{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}
+  .btn-primary:hover{background:var(--accent);color:#06110f;}
+  .btn-ghost:hover{border-color:var(--border-hover);color:var(--accent-2);}
+
+  /* SECTION SHELL */
+  section{padding:70px 0;border-top:1px solid var(--border);}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;color:var(--text-dim);
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;
+  }
+  h2.section-title{
+    font-family:var(--display);font-size:clamp(26px,3.4vw,34px);
+    font-weight:600;margin-bottom:36px;
+  }
+  h2.section-title .accent{color:var(--accent);}
+
+  /* TAG (signature element) */
+  .tag{
+    font-family:var(--mono);font-size:12px;
+    padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:var(--accent);
+    border:1px solid rgba(79,209,197,0.25);
+    white-space:nowrap;
+  }
+  .tag.amber{background:var(--accent-2-soft);color:var(--accent-2);border-color:rgba(242,177,85,0.25);}
+  .tag::before{content:"<";opacity:.55;}
+  .tag::after{content:"/>";opacity:.55;}
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;}
+
+  /* EXPERIENCE */
+  .exp-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:28px 30px;
+    position:relative;overflow:hidden;
+  }
+  .exp-card::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);
+  }
+  .exp-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .exp-role{font-family:var(--display);font-size:19px;font-weight:600;}
+  .exp-date{font-family:var(--mono);font-size:12px;color:var(--text-dim);}
+  .exp-org{color:var(--accent);font-size:14px;margin-bottom:16px;}
+  .exp-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;color:var(--text-muted);font-size:14.5px;margin-bottom:18px;}
+  .exp-card li{padding-left:18px;position:relative;}
+  .exp-card li::before{content:"›";position:absolute;left:0;color:var(--accent);}
+
+  /* PROJECTS */
+  .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  @media (max-width:680px){.project-grid{grid-template-columns:1fr;}}
+  .card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:border-color .15s, transform .15s;
+  }
+  .card:hover{border-color:var(--border-hover);transform:translateY(-3px);}
+  .card-media{
+    height:150px;background:var(--bg-elevated);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;border-bottom:1px solid var(--border);
+  }
+  .card-media img{width:100%;height:100%;object-fit:cover;object-position:top;opacity:.92;}
+  .card-media.placeholder{font-family:var(--mono);color:var(--text-dim);font-size:13px;}
+  .card-body{padding:20px 22px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .card-title{font-family:var(--display);font-size:17px;font-weight:600;}
+  .card-desc{color:var(--text-muted);font-size:13.5px;}
+  .card-links{display:flex;gap:16px;margin-top:auto;padding-top:10px;font-family:var(--mono);font-size:12.5px;}
+  .card-links a{color:var(--accent);border-bottom:1px solid transparent;}
+  .card-links a:hover{border-color:var(--accent);}
+
+  .more-projects{margin-top:26px;padding-top:26px;border-top:1px dashed var(--border);}
+  .more-projects .label{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:12px;}
+  .more-projects .tag-row a{color:inherit;}
+
+  /* SKILLS */
+  .skill-group{margin-bottom:26px;}
+  .skill-group .label{font-family:var(--mono);font-size:12.5px;color:var(--text-muted);margin-bottom:12px;}
+
+  /* CERTS & REPORTS */
+  .list-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:680px){.list-grid{grid-template-columns:1fr;}}
+  .list-item{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 20px;display:flex;flex-direction:column;gap:6px;
+    transition:border-color .15s;
+  }
+  .list-item:hover{border-color:var(--border-hover);}
+  .list-item .name{font-family:var(--display);font-weight:600;font-size:15px;}
+  .list-item .issuer{font-size:13px;color:var(--text-dim);}
+  .list-item .link{font-family:var(--mono);font-size:12.5px;color:var(--accent-2);margin-top:4px;}
+
+  /* CONTACT */
+  .contact-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;}
+  .contact-item{
+    display:flex;align-items:center;gap:10px;
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:14px 20px;font-family:var(--mono);font-size:13.5px;
+  }
+  .contact-item:hover{border-color:var(--accent);color:var(--accent);}
+  footer{padding:36px 0;text-align:center;color:var(--text-dim);font-family:var(--mono);font-size:12px;border-top:1px solid var(--border);}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease, transform .5s ease;}
+  .reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">keshav<span>.</span>dev</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#blog">blog</a>
+      <a href="#certificates">certificates</a>
+      <a href="#reports">audits</a>
+      <a href="#contact">contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="terminal" id="terminalLine"></div>
+    <h1 class="name">Keshav Maini</h1>
+    <div class="role-line">Web <span class="accent">Developer</span> · <span class="accent2">SEO</span> Specialist</div>
+    <p class="lede">BCA student in Punjab, India, building and deploying full websites with HTML, CSS and JavaScript — then making sure people can actually find them. Currently interning at InAmigos Foundation.</p>
+    <div class="btn-row">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="mailto:keshavmaini2@gmail.com" class="btn btn-ghost">Get in Touch</a>
+      <a href="https://github.com/keshavmaini" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+  </div>
+</header>
+
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="eyebrow">Currently</div>
+    <h2 class="section-title">Work <span class="accent">Experience</span></h2>
+    <div class="exp-card">
+      <div class="exp-head">
+        <div class="exp-role">Web Development Intern</div>
+        <div class="exp-date">June 2026 — Present</div>
+      </div>
+      <div class="exp-org">InAmigos Foundation</div>
+      <ul>
+        <li>Designed and enhanced website layouts and features using Figma, converting design ideas into user-friendly web interfaces.</li>
+        <li>Developed and updated responsive webpages using HTML, CSS and JavaScript based on assigned tasks and project requirements.</li>
+        <li>Improved website sections, navigation and user experience while maintaining responsive design across devices.</li>
+        <li>Assisted in implementing SEO best practices and content organization to improve usability and visibility.</li>
+      </ul>
+      <div class="tag-row">
+        <span class="tag">html</span><span class="tag">css</span><span class="tag">javascript</span><span class="tag amber">seo</span><span class="tag amber">figma</span>
+      </div>
+    </div>
+
+    <div class="exp-card" style="margin-top:22px;">
+      <div class="exp-head">
+        <div class="exp-role">Web Developer</div>
+        <div class="exp-date">April 2026 — July 2026</div>
+      </div>
+      <div class="exp-org">Pizza Shack House</div>
+      <ul>
+        <li>Built and styled a restaurant website front-end using HTML, CSS and JavaScript.</li>
+        <li>Structured menu, ordering and contact sections for a clear, easy-to-navigate layout.</li>
+        <li>Optimized the site for responsiveness across mobile and desktop devices.</li>
+      </ul>
+      <div class="tag-row">
+        <span class="tag">html</span><span class="tag">css</span><span class="tag">javascript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap reveal">
+    <div class="eyebrow">Selected Work</div>
+    <h2 class="section-title">Things I've <span class="accent">Built</span></h2>
+    <div class="project-grid">
+
+      <div class="card">
+        <div class="card-media placeholder">Helping Hands AI</div>
+        <div class="card-body">
+          <div class="card-title">Helping Hands AI</div>
+          <div class="card-desc">A platform connecting people who need help with volunteers who can offer it, built with HTML, CSS and JavaScript.</div>
+          <div class="tag-row"><span class="tag">html</span><span class="tag">css</span><span class="tag">javascript</span><span class="tag amber">deployed on vercel</span></div>
+          <div class="card-links">
+            <a href="https://helping-hands-ai.vercel.app/" target="_blank">Live Demo →</a>
+            <a href="https://github.com/keshavmaini/helping-hands-AI" target="_blank">Code →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-media"><img src="https://keshavmaini.github.io/myportfolio/images/gst-calculator.png" alt="GST & Invoice Calculator"></div>
+        <div class="card-body">
+          <div class="card-title">GST & Invoice Calculator</div>
+          <div class="card-desc">A calculation tool that generates invoices with GST breakdowns applied automatically.</div>
+          <div class="tag-row"><span class="tag">javascript</span><span class="tag">dom</span><span class="tag amber">deployed on vercel</span></div>
+          <div class="card-links">
+            <a href="https://gst-invoice-calculator-phi.vercel.app/" target="_blank">Live Demo →</a>
+            <a href="https://github.com/keshavmaini/gst-invoice-calculator" target="_blank">Code →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-media placeholder">NGO / Live Client Site</div>
+        <div class="card-body">
+          <div class="card-title">InAmigos Foundation Website</div>
+          <div class="card-desc">Live NGO website — responsive pages, improved navigation and SEO-conscious content structure.</div>
+          <div class="tag-row"><span class="tag">html</span><span class="tag">css</span><span class="tag amber">seo</span></div>
+          <div class="card-links">
+            <a href="#contact">Ask for link →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-media placeholder">Weather Forecast App</div>
+        <div class="card-body">
+          <div class="card-title">Weather Forecast App</div>
+          <div class="card-desc">Real-time weather lookup with dynamic search, built on a REST API integration.</div>
+          <div class="tag-row"><span class="tag">javascript</span><span class="tag">rest api</span></div>
+          <div class="card-links">
+            <a href="https://github.com/keshavmaini" target="_blank">Code →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-media placeholder">Shopping Cart App</div>
+        <div class="card-body">
+          <div class="card-title">Shopping Cart App</div>
+          <div class="card-desc">Interactive cart with add, update and remove logic, plus dynamic price calculation.</div>
+          <div class="tag-row"><span class="tag">javascript</span><span class="tag">state</span></div>
+          <div class="card-links">
+            <a href="https://github.com/keshavmaini" target="_blank">Code →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-media"><img src="https://keshavmaini.github.io/myportfolio/images/spatify.png" alt="Spotify UI Clone"></div>
+        <div class="card-body">
+          <div class="card-title">Spotify UI Clone</div>
+          <div class="card-desc">Pixel-focused UI recreation, practicing layout precision and visual detail.</div>
+          <div class="tag-row"><span class="tag">html</span><span class="tag">css</span></div>
+          <div class="card-links">
+            <a href="https://github.com/keshavmaini/Spatify" target="_blank">Code →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-media placeholder">Amazon UI Clone</div>
+        <div class="card-body">
+          <div class="card-title">Amazon UI Clone</div>
+          <div class="card-desc">Recreated a dense e-commerce layout to practice grid systems and responsive components.</div>
+          <div class="tag-row"><span class="tag">html</span><span class="tag">css</span></div>
+          <div class="card-links">
+            <a href="https://github.com/keshavmaini" target="_blank">Code →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="more-projects">
+      <div class="label">// more practice builds</div>
+      <div class="tag-row">
+        <a href="https://github.com/keshavmaini/Tic-Tac-Toe" target="_blank" class="tag">tic-tac-toe</a>
+        <a href="https://github.com/keshavmaini/Guess-the-Number-" target="_blank" class="tag">guess-the-number</a>
+        <a href="https://github.com/keshavmaini/IQ-Quiz-GAme" target="_blank" class="tag">quiz-game</a>
+        <a href="https://github.com/keshavmaini/musicplayer" target="_blank" class="tag">music-player</a>
+        <a href="https://github.com/keshavmaini" target="_blank" class="tag">book-manager</a>
+        <a href="https://github.com/keshavmaini" target="_blank" class="tag">calorie-counter</a>
+        <a href="https://github.com/keshavmaini" target="_blank" class="tag">real-estate-site</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap reveal">
+    <div class="eyebrow">Toolbox</div>
+    <h2 class="section-title">Skills & <span class="accent">Tools</span></h2>
+
+    <div class="skill-group">
+      <div class="label">// frontend</div>
+      <div class="tag-row">
+        <span class="tag">html</span><span class="tag">css</span><span class="tag">javascript</span>
+        <span class="tag">node.js</span><span class="tag">responsive-design</span>
+        <span class="tag">dom-manipulation</span><span class="tag">rest-api</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="label">// currently learning</div>
+      <div class="tag-row">
+        <span class="tag">typescript</span><span class="tag">react.js</span>
+        <span class="tag">mongodb</span><span class="tag">tailwind css</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="label">// seo & marketing</div>
+      <div class="tag-row">
+        <span class="tag amber">technical-seo</span><span class="tag amber">on-page-seo</span>
+        <span class="tag amber">off-page-seo</span><span class="tag amber">local-seo</span>
+        <span class="tag amber">keyword-research</span><span class="tag amber">google-analytics</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="label">// tools</div>
+      <div class="tag-row">
+        <span class="tag">git</span><span class="tag">github</span><span class="tag">vs-code</span>
+        <span class="tag">figma</span><span class="tag">semrush</span><span class="tag">google-search-ads</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="blog">
+  <div class="wrap reveal">
+    <div class="eyebrow">Writing</div>
+    <h2 class="section-title">SEO & Career <span class="accent">Blog</span></h2>
+    <p class="lede" style="margin-bottom:26px;">I write about SEO, freelancing and digital skills at <a href="https://learnseowithkeshav.blogspot.com/" target="_blank" style="color:var(--accent-2);border-bottom:1px solid rgba(242,177,85,.4);">learnseowithkeshav.blogspot.com</a>.</p>
+    <div class="list-grid">
+      <a class="list-item" href="https://learnseowithkeshav.blogspot.com/2026/06/seo-tips-for-beginners-2026.html" target="_blank">
+        <div class="name">SEO Tips for Beginners: A Simple Guide to Improve Your Website Ranking in 2026</div>
+        <div class="issuer">June 2026</div>
+        <div class="link">Read post →</div>
+      </a>
+      <a class="list-item" href="https://learnseowithkeshav.blogspot.com/2026/06/complete-guide-to-building-digital-skills-2026.html" target="_blank">
+        <div class="name">Complete Guide to Building Digital Skills in 2026</div>
+        <div class="issuer">June 2026</div>
+        <div class="link">Read post →</div>
+      </a>
+      <a class="list-item" href="https://learnseowithkeshav.blogspot.com/2026/06/artificial-intelligence-in-simple-words.html" target="_blank">
+        <div class="name">Understanding Artificial Intelligence in Simple Words</div>
+        <div class="issuer">June 2026</div>
+        <div class="link">Read post →</div>
+      </a>
+      <a class="list-item" href="https://learnseowithkeshav.blogspot.com/2026/05/how-to-start-freelancing-as-a-beginner.html" target="_blank">
+        <div class="name">How to Start Freelancing as a Beginner</div>
+        <div class="issuer">May 2026</div>
+        <div class="link">Read post →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="certificates">
+  <div class="wrap reveal">
+    <div class="eyebrow">Verified</div>
+    <h2 class="section-title">Certifications</h2>
+    <div class="list-grid">
+      <a class="list-item" href="https://keshavmaini.github.io/myportfolio/certificates/seo-toolkit-crash-course.pdf" target="_blank">
+        <div class="name">SEO Toolkit Crash Course</div>
+        <div class="issuer">Semrush Academy</div>
+        <div class="link">View certificate →</div>
+      </a>
+      <a class="list-item" href="https://keshavmaini.github.io/myportfolio/certificates/technical-seo-ai-search.pdf" target="_blank">
+        <div class="name">Technical SEO & AI Search</div>
+        <div class="issuer">Semrush Academy</div>
+        <div class="link">View certificate →</div>
+      </a>
+      <a class="list-item" href="https://keshavmaini.github.io/myportfolio/certificates/offpage-seo-ai-search.pdf" target="_blank">
+        <div class="name">Off-Page SEO & AI Search</div>
+        <div class="issuer">Semrush Academy</div>
+        <div class="link">View certificate →</div>
+      </a>
+      <a class="list-item" href="https://keshavmaini.github.io/myportfolio/certificates/google-ads-search-certification.pdf" target="_blank">
+        <div class="name">Google Search Ads Certification</div>
+        <div class="issuer">Google</div>
+        <div class="link">View certificate →</div>
+      </a>
+      <div class="list-item">
+        <div class="name">freeCodeCamp JavaScript Certification</div>
+        <div class="issuer">freeCodeCamp</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reports">
+  <div class="wrap reveal">
+    <div class="eyebrow">Applied SEO</div>
+    <h2 class="section-title">Audit <span class="accent2">Reports</span></h2>
+    <div class="list-grid">
+      <a class="list-item" href="https://keshavmaini.github.io/myportfolio/reports/kiwla-audit.pdf" target="_blank">
+        <div class="name">Kiwla Website SEO Audit</div>
+        <div class="issuer">Technical audit using Semrush & Screaming Frog</div>
+        <div class="link">View report →</div>
+      </a>
+      <a class="list-item" href="https://keshavmaini.github.io/myportfolio/reports/psychiatric-audit.pdf" target="_blank">
+        <div class="name">Psychiatric Medicines Site Audit</div>
+        <div class="issuer">Website analysis & technical SEO report</div>
+        <div class="link">View report →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap reveal">
+    <div class="eyebrow">Let's Talk</div>
+    <h2 class="section-title">Open to <span class="accent">Internships</span></h2>
+    <p class="lede">Looking for a web development internship where I can learn from experienced teams and ship real work. Reach out below.</p>
+    <div class="contact-row">
+      <a class="contact-item" href="mailto:keshavmaini2@gmail.com">✉ keshavmaini2@gmail.com</a>
+      <a class="contact-item" href="tel:+919814324535">☎ +91 98143 24535</a>
+      <a class="contact-item" href="https://github.com/keshavmaini" target="_blank">⌥ github.com/keshavmaini</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Keshav Maini — built with HTML, CSS & JavaScript</footer>
+
+<script>
+  // Terminal typing effect
+  const line = "whoami";
+  const el = document.getElementById('terminalLine');
+  let i = 0;
+  function type(){
+    if(i <= line.length){
+      el.innerHTML = line.slice(0,i) + '<span class="cursor"></span>';
+      i++;
+      setTimeout(type, 90);
+    }
+  }
+  type();
+
+  // Nav toggle (mobile)
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){ entry.target.classList.add('in'); }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
